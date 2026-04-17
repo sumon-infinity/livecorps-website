@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Corps Ltd. — Bangladesh</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --g0:#0A2116;--g1:#1E6B3C;--g2:#2E9955;--g3:#A8D5B5;--g4:#EAF5EE;
+  --ink:#0D0D0D;--ink2:#555;--border:#E2E2E2;--white:#FFF;
+  --sw:248px;
+  --D:'Barlow Condensed',sans-serif;
+  --B:'Barlow',sans-serif;
+}
+body{font-family:var(--B);color:var(--ink);background:#F8FAF8;display:flex}
+
+/* SIDEBAR */
+#sb{width:var(--sw);min-height:100vh;background:var(--g0);position:fixed;top:0;left:0;display:flex;flex-direction:column;z-index:200;transition:transform .28s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+.slogo{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.slogo-t{font-family:var(--D);font-size:28px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#fff}
+.slogo-t span{color:var(--g2)}
+.slogo-s{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:3px}
+.snav{padding:12px 0 28px;flex:1}
+.sl{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;font-family:var(--D);font-size:13px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.48);cursor:pointer;border-left:3px solid transparent;transition:all .16s;text-decoration:none}
+.sl:hover,.sl.open{color:#fff;background:rgba(255,255,255,.05)}
+.sl.active{color:var(--g3);border-left-color:var(--g2);background:rgba(46,153,85,.1)}
+.sca{font-size:9px;transition:transform .25s;opacity:.5}
+.ssec.open .sca{transform:rotate(180deg);opacity:1}
+.ssub{list-style:none;max-height:0;overflow:hidden;transition:max-height .32s ease}
+.ssec.open .ssub{max-height:600px}
+.ssub li a{display:flex;align-items:center;gap:10px;padding:8px 24px 8px 40px;font-size:11.5px;font-weight:400;letter-spacing:.4px;color:rgba(255,255,255,.42);text-decoration:none;border-left:3px solid transparent;transition:all .15s}
+.ssub li a:hover{color:rgba(255,255,255,.88);background:rgba(255,255,255,.04);border-left-color:var(--g2)}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* MAIN */
+#main{margin-left:var(--sw);flex:1;min-height:100vh}
+
+/* TOPBAR */
+#tb{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:54px}
+.tbc{font-family:var(--D);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#aaa}
+.tbc strong{color:var(--g1)}
+.tba{display:flex;gap:10px;align-items:center}
+
+/* CART BADGE */
+.cart-btn{position:relative;display:inline-flex;align-items:center;gap:6px;padding:0 16px;height:36px;font-family:var(--D);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer;background:var(--g1);color:#fff;transition:all .16s}
+.cart-btn:hover{background:var(--g0)}
+.cart-count{position:absolute;top:-6px;right:-6px;background:#e53935;color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;line-height:1;padding:0 3px;font-family:var(--D);display:none}
+.cart-count.vis{display:flex}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:0 20px;height:36px;font-family:var(--D);font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:all .16s}
+.bs{background:var(--g1);color:#fff}.bs:hover{background:var(--g0)}
+.bl{background:transparent;color:var(--g1);border:1.5px solid var(--g1)}.bl:hover{background:var(--g4)}
+.bw{background:#fff;color:var(--ink)}.bw:hover{background:var(--g4)}
+.bg{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.28)}.bg:hover{background:rgba(255,255,255,.22)}
+
+/* PAGE SYSTEM */
+.pg{display:none}.pg.active{display:block;animation:fi .28s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* HOME HERO */
+.hero{background:var(--g0);padding:80px 60px 72px;position:relative;overflow:hidden}
+.hero::after{content:'LIVE';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:var(--D);font-size:220px;font-weight:900;letter-spacing:-6px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none}
+.htag{font-family:var(--D);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--g2);margin-bottom:18px}
+.hero h1{font-family:var(--D);font-size:clamp(48px,6vw,82px);font-weight:900;letter-spacing:-1px;line-height:.94;color:#fff;text-transform:uppercase;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--g2)}
+.hdesc{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);max-width:400px;line-height:1.8;margin-bottom:36px;letter-spacing:.2px}
+.hcta{display:flex;gap:12px;flex-wrap:wrap}
+
+/* STATS STRIP */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid var(--border)}
+.si{padding:24px 28px;border-right:1px solid var(--border)}.si:last-child{border-right:none}
+.sn{font-family:var(--D);font-size:38px;font-weight:900;letter-spacing:-1px;color:var(--g1);line-height:1}
+.sl2{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#aaa;margin-top:4px}
+
+/* DIVISIONS */
+.dw{padding:64px 60px}
+.slabel{font-family:var(--D);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--g2);margin-bottom:8px}
+.stitle{font-family:var(--D);font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;color:var(--ink);margin-bottom:34px}
+.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border)}
+.dc{background:#fff;cursor:pointer;transition:background .16s;overflow:hidden}
+.dc:hover{background:var(--g4)}
+.dbar{height:3px;background:var(--g1);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.dc:hover .dbar{transform:scaleX(1)}
+.dtop{padding:34px 34px 22px}
+.dnum{font-family:var(--D);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#ccc;margin-bottom:10px}
+.dtitle{font-family:var(--D);font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-.4px;color:var(--ink);margin-bottom:8px}
+.ddesc{font-size:13px;font-weight:300;color:var(--ink2);line-height:1.7;max-width:300px}
+.dbot{padding:10px 34px 26px;display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--D);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;background:var(--g4);color:var(--g1)}
+
+/* BRAND HERO */
+.bh{padding:64px 60px 52px;position:relative;overflow:hidden}
+.bh::after{content:attr(data-i);position:absolute;right:40px;bottom:-20px;font-family:var(--D);font-size:180px;font-weight:900;color:rgba(255,255,255,.06);line-height:1;pointer-events:none}
+.btag{font-family:var(--D);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px}
+.bname{font-family:var(--D);font-size:clamp(44px,5.5vw,76px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;color:#fff;line-height:.94;margin-bottom:10px}
+.bsub{font-size:13px;font-weight:300;color:rgba(255,255,255,.55);font-style:italic;margin-bottom:24px;letter-spacing:.3px}
+.bmanifesto{font-size:13px;font-weight:300;color:rgba(255,255,255,.6);max-width:580px;line-height:1.9;margin-bottom:28px;border-left:2px solid rgba(255,255,255,.2);padding-left:16px}
+.bcta{display:flex;gap:12px;flex-wrap:wrap}
+
+/* MENU */
+.bbody{padding:48px 60px}
+.mcat{margin-bottom:40px}
+.mch{font-family:var(--D);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink2);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.mr{display:grid;grid-template-columns:1fr auto;align-items:center;padding:12px 0;border-bottom:1px solid #F0F0F0;gap:16px}
+.mr:last-child{border-bottom:none}
+.mn{font-family:var(--D);font-size:16px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--ink)}
+.md{font-size:12px;font-weight:300;color:#999;margin-top:2px;line-height:1.5}
+.mr-right{display:flex;align-items:center;gap:12px}
+.mp{font-family:var(--D);font-size:16px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.add-item-btn{height:32px;padding:0 14px;font-family:var(--D);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:var(--g1);color:#fff;border:none;cursor:pointer;transition:background .15s;white-space:nowrap}
+.add-item-btn:hover{background:var(--g0)}
+
+/* CART PANEL */
+#cart-panel{position:fixed;right:0;top:0;width:380px;height:100vh;background:#fff;border-left:1px solid var(--border);z-index:500;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 32px rgba(0,0,0,.1)}
+#cart-panel.open{transform:translateX(0)}
+.cp-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cp-title{font-family:var(--D);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:-.3px}
+.cp-close{background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1;padding:4px}
+.cp-items{flex:1;overflow-y:auto;padding:16px 24px}
+.ci-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #F5F5F5}
+.ci-row:last-child{border-bottom:none}
+.ci-emoji{font-size:22px;width:36px;text-align:center}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:var(--D);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-brand{font-size:11px;color:#aaa;margin-top:1px}
+.ci-price{font-family:var(--D);font-size:15px;font-weight:700;color:var(--g1);white-space:nowrap}
+.ci-qty{display:flex;align-items:center;gap:6px}
+.qty-btn{width:24px;height:24px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .14s}
+.qty-btn:hover{background:var(--g4);border-color:var(--g1)}
+.qty-num{font-family:var(--D);font-size:14px;font-weight:700;min-width:18px;text-align:center}
+.ci-del{background:none;border:none;color:#ccc;cursor:pointer;font-size:16px;padding:4px;transition:color .14s}
+.ci-del:hover{color:#e53935}
+.cart-empty{text-align:center;padding:60px 24px;color:#bbb}
+.cart-empty-ico{font-size:48px;margin-bottom:12px}
+.cart-empty-t{font-family:var(--D);font-size:16px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.cart-empty-s{font-size:12px;font-weight:300}
+.cp-foot{padding:20px 24px;border-top:1px solid var(--border);background:#FAFAFA}
+.cp-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.cp-subtotal-label{font-family:var(--D);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#888}
+.cp-subtotal-val{font-family:var(--D);font-size:22px;font-weight:900;color:var(--ink)}
+.cp-note{font-size:11px;color:#aaa;margin-bottom:16px}
+.cp-checkout{width:100%;height:44px;background:var(--g1);color:#fff;border:none;font-family:var(--D);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .15s}
+.cp-checkout:hover{background:var(--g0)}
+
+/* CHECKOUT MODAL */
+#checkout-modal{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.55);align-items:center;justify-content:center}
+#checkout-modal.open{display:flex}
+.cm-box{background:#fff;width:min(540px,92vw);max-height:90vh;overflow-y:auto;display:flex;flex-direction:column}
+.cm-head{padding:24px 28px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cm-title{font-family:var(--D);font-size:24px;font-weight:900;text-transform:uppercase;letter-spacing:-.3px}
+.cm-close{background:none;border:none;font-size:22px;cursor:pointer;color:#888}
+.cm-body{padding:28px}
+.cm-section{margin-bottom:24px}
+.cm-sh{font-family:var(--D);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g1);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--g4)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg2{display:flex;flex-direction:column;gap:5px}
+.fg2.full{grid-column:1/-1}
+.fl{font-family:var(--D);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink2)}
+input,select,textarea{font-family:var(--B);font-size:14px;font-weight:300;padding:10px 12px;border:1px solid var(--border);background:#FAFAFA;color:var(--ink);outline:none;transition:border-color .16s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--g1);background:#fff}
+textarea{resize:vertical;min-height:80px}
+
+/* PAYMENT METHOD */
+.pay-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.pay-opt{border:1.5px solid var(--border);padding:12px 8px;cursor:pointer;text-align:center;transition:all .16s;position:relative}
+.pay-opt:hover{border-color:var(--g1)}
+.pay-opt.sel{border-color:var(--g1);background:var(--g4)}
+.pay-opt.sel::after{content:'✓';position:absolute;top:4px;right:6px;font-size:10px;color:var(--g1);font-weight:700}
+.pay-opt-icon{font-size:22px;margin-bottom:4px}
+.pay-opt-name{font-family:var(--D);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink)}
+.pay-opt-sub{font-size:10px;color:#aaa;margin-top:1px}
+.pay-details{padding:14px;background:var(--g4);border-left:2px solid var(--g2);margin-top:6px;font-size:12px;color:var(--g0);font-weight:400;line-height:1.7;display:none}
+.pay-details.vis{display:block}
+.order-summary{background:#FAFAFA;border:1px solid var(--border);padding:14px}
+.os-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed #eee}
+.os-row:last-child{border-bottom:none;font-weight:700;font-family:var(--D);font-size:15px;padding-top:10px;margin-top:4px}
+.cm-submit{width:100%;height:46px;background:var(--g1);color:#fff;border:none;font-family:var(--D);font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:background .15s}
+.cm-submit:hover{background:var(--g0)}
+
+/* ORDER FORM inside brand */
+.ow{background:#fff;border:1px solid var(--border);padding:40px;margin-top:8px}
+.ot{font-family:var(--D);font-size:24px;font-weight:900;text-transform:uppercase;letter-spacing:-.3px;color:var(--ink);margin-bottom:4px}
+.os2{font-size:13px;font-weight:300;color:#aaa;margin-bottom:28px}
+.dn{margin-top:18px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;font-weight:300;color:#bbb;letter-spacing:.3px}
+
+/* REVIEWS */
+.rev-section{padding:48px 60px;background:#fff;border-top:1px solid var(--border)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.rev-card{border:1px solid var(--border);padding:20px;transition:border-color .16s}
+.rev-card:hover{border-color:var(--g2)}
+.rev-stars{color:#f5a623;font-size:14px;margin-bottom:10px;letter-spacing:2px}
+.rev-text{font-size:13px;font-weight:300;color:var(--ink2);line-height:1.8;margin-bottom:14px;font-style:italic}
+.rev-author{display:flex;align-items:center;gap:10px}
+.rev-av{width:34px;height:34px;border-radius:50%;background:var(--g0);display:flex;align-items:center;justify-content:center;font-family:var(--D);font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.rev-name{font-family:var(--D);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.rev-date{font-size:11px;color:#bbb}
+.rev-brand-tag{font-family:var(--D);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g2);margin-top:2px}
+
+/* REVIEW FORM */
+.rev-form{background:var(--g4);border:1px solid var(--g3);padding:28px;margin-top:28px}
+.rev-form-title{font-family:var(--D);font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:-.2px;margin-bottom:16px}
+.star-select{display:flex;gap:4px;margin-bottom:14px}
+.star-select span{font-size:26px;cursor:pointer;color:#ddd;transition:color .14s}
+.star-select span.lit{color:#f5a623}
+
+/* MART */
+.mhero{background:var(--g0);padding:64px 60px;position:relative;overflow:hidden}
+.mhero::after{content:'MART';position:absolute;right:-10px;bottom:-20px;font-family:var(--D);font-size:150px;font-weight:900;color:rgba(255,255,255,.04);pointer-events:none}
+.mhero h1{font-family:var(--D);font-size:clamp(44px,5vw,72px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;color:#fff;margin-bottom:12px}
+.mhero p{font-size:14px;font-weight:300;color:rgba(255,255,255,.48);max-width:380px;line-height:1.8;margin-bottom:28px}
+.fbar{background:#fff;border-bottom:1px solid var(--border);padding:0 60px;display:flex;gap:0;overflow-x:auto}
+.ftab{font-family:var(--D);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px 20px;border:none;background:transparent;color:#bbb;cursor:pointer;border-bottom:3px solid transparent;transition:all .16s;white-space:nowrap}
+.ftab:hover{color:var(--g1)}.ftab.active{color:var(--g1);border-bottom-color:var(--g1)}
+.pgrid{padding:40px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:2px;background:var(--border)}
+.pc{background:#fff;transition:background .16s;cursor:pointer}.pc:hover{background:var(--g4)}
+.pimg{height:120px;display:flex;align-items:center;justify-content:center;font-size:38px;background:#F4F4F4}
+.pbody{padding:12px 14px 16px}
+.pcat{font-family:var(--D);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g2);margin-bottom:3px}
+.pname{font-family:var(--D);font-size:14px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:3px;line-height:1.2}
+.pdesc{font-size:11px;font-weight:300;color:#aaa;line-height:1.5;margin-bottom:10px}
+.pfoot{display:flex;align-items:center;justify-content:space-between}
+.ppr{font-family:var(--D);font-size:16px;font-weight:800;color:var(--g1)}
+.ab{width:28px;height:28px;background:var(--g1);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;transition:background .16s}
+.ab:hover{background:var(--g0)}
+
+/* ABOUT / ORGANOGRAM */
+.asplit{display:grid;grid-template-columns:1fr 1fr}
+.al{background:var(--g0);padding:72px 48px;min-height:440px;display:flex;flex-direction:column;justify-content:flex-end}
+.al h2{font-family:var(--D);font-size:44px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;color:#fff;line-height:.94;margin-bottom:16px}
+.al p{font-size:13px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:12px}
+.ar{padding:72px 48px;background:#fff}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.tc{border:1px solid var(--border);padding:20px 12px;text-align:center;transition:border-color .16s}.tc:hover{border-color:var(--g1)}
+.tav{width:46px;height:46px;background:var(--g0);display:flex;align-items:center;justify-content:center;font-family:var(--D);font-size:15px;font-weight:800;color:#fff;margin:0 auto 10px}
+.tn{font-family:var(--D);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.tr{font-size:11px;font-weight:300;color:#999;margin-top:2px}
+.ablock{margin-top:24px;padding:20px;background:var(--g4);border-left:3px solid var(--g1)}
+.ablock p{font-size:13px;font-weight:300;color:var(--ink2);line-height:1.9}
+
+/* ORGANOGRAM */
+.org-section{padding:60px}
+.org-wrap{overflow-x:auto;padding-bottom:24px}
+.org-tree{display:flex;flex-direction:column;align-items:center;gap:0}
+.org-level{display:flex;justify-content:center;gap:16px;position:relative;padding:16px 0}
+.org-node{background:#fff;border:1.5px solid var(--border);padding:10px 14px;text-align:center;min-width:130px;transition:all .2s;cursor:default;position:relative}
+.org-node:hover{border-color:var(--g1);background:var(--g4)}
+.org-node.ceo{border-color:var(--g0);background:var(--g0);color:#fff}
+.org-node.ceo .on-name,.org-node.ceo .on-title{color:#fff}
+.org-node.cxo{border-color:var(--g1)}
+.on-name{font-family:var(--D);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink);line-height:1.2}
+.on-title{font-family:var(--D);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--g1);margin-top:3px}
+.org-node.ceo .on-title{color:var(--g3)}
+.org-connector{width:1.5px;height:24px;background:var(--border);margin:0 auto}
+.org-h-line{display:flex;align-items:flex-start;justify-content:center;position:relative}
+.org-h-line::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);height:1.5px;background:var(--border);width:calc(100% - 60px)}
+.org-child-col{display:flex;flex-direction:column;align-items:center}
+.org-sub{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:0}
+
+/* CONTACT */
+.csplit{display:grid;grid-template-columns:1fr 1.4fr}
+.cl{background:var(--g1);padding:64px 44px}
+.cl h2{font-family:var(--D);font-size:38px;font-weight:900;text-transform:uppercase;letter-spacing:-.5px;color:#fff;margin-bottom:12px}
+.cl p{font-size:13px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:30px}
+.crow{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.ci{width:36px;height:36px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.cilabel{font-family:var(--D);font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g3);margin-bottom:1px}
+.cival{font-size:12px;font-weight:300;color:rgba(255,255,255,.78)}
+.cival a{color:rgba(255,255,255,.78);text-decoration:none}.cival a:hover{color:#fff;text-decoration:underline}
+.cr{padding:64px 48px;background:#fff}
+.cr h2{font-family:var(--D);font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-.3px;margin-bottom:6px}
+.cr .csub{font-size:13px;font-weight:300;color:#aaa;margin-bottom:26px}
+
+/* GENERIC */
+.gh{background:var(--g0);padding:64px 60px;position:relative;overflow:hidden}
+.gh.lg{background:linear-gradient(135deg,#1a1400,#0d0b00)}
+.gh h1{font-family:var(--D);font-size:clamp(44px,5vw,70px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;color:#fff;margin-bottom:12px}
+.gh p{font-size:14px;font-weight:300;color:rgba(255,255,255,.48);max-width:420px;line-height:1.8;margin-bottom:28px}
+.sw{padding:56px 60px}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-top:32px}
+.sc{background:#fff;padding:30px 28px;transition:background .16s}.sc:hover{background:var(--g4)}
+.si2{font-size:26px;margin-bottom:12px}
+.stit{font-family:var(--D);font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px}
+.sdesc{font-size:13px;font-weight:300;color:var(--ink2);line-height:1.7}
+.ew{padding:0 60px 60px}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--g0);color:#fff;padding:12px 22px;font-family:var(--D);font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;box-shadow:0 8px 28px rgba(0,0,0,.2);transform:translateY(70px);opacity:0;transition:all .32s cubic-bezier(.34,1.56,.64,1);z-index:999}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.green{background:var(--g1)}
+
+/* HAMBURGER */
+.ham{display:none;position:fixed;top:10px;left:10px;z-index:300;background:var(--g0);border:none;width:40px;height:40px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.ham span{display:block;width:18px;height:1.5px;background:#fff}
+.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:150}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  :root{--sw:0px}
+  #sb{transform:translateX(-248px);width:248px}
+  #sb.open{transform:translateX(0)}
+  .ovl.open{display:block}
+  #main{margin-left:0}
+  .ham{display:flex}
+  #tb{padding:0 16px 0 56px}
+  .hero,.mhero,.gh,.dw,.bbody,.sw,.ew,.org-section{padding:40px 20px}
+  .strip{grid-template-columns:repeat(2,1fr)}
+  .si{border-right:none;border-bottom:1px solid var(--border)}
+  .dgrid,.sgrid{grid-template-columns:1fr}
+  .asplit,.csplit{grid-template-columns:1fr}
+  .fg,.tgrid{grid-template-columns:1fr}
+  .fbar,.pgrid{padding:12px 20px}
+  .al,.ar,.cl,.cr{padding:40px 22px}
+  .ow{padding:28px 20px}
+  #cart-panel{width:100%}
+  .rev-grid{grid-template-columns:1fr}
+  .pay-opts{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="ovl" id="ovl" onclick="closeSB()"></div>
+
+<!-- SIDEBAR -->
+<aside id="sb">
+  <div class="slogo">
+    <div class="slogo-t">LIVE<span>.</span></div>
+    <div class="slogo-s">Corps Ltd. · Bangladesh</div>
+  </div>
+  <nav class="snav">
+    <div class="sl" onclick="go('home',this)">Home</div>
+
+    <div class="ssec" id="se">
+      <div class="sl" onclick="tSec('se')">Live Eats <span class="sca">▾</span></div>
+      <ul class="ssub">
+        <li><a href="#" onclick="br('jolly');return false"><span class="dot" style="background:#4a0e2a"></span>Jolly</a></li>
+        <li><a href="#" onclick="br('box');return false"><span class="dot" style="background:#7c5200"></span>Box Biriyani</a></li>
+        <li><a href="#" onclick="br('dojo');return false"><span class="dot" style="background:#1a0a00"></span>Dojo 道場</a></li>
+        <li><a href="#" onclick="br('zuma');return false"><span class="dot" style="background:#5a1a00"></span>Zuma Zura</a></li>
+        <li><a href="#" onclick="br('ping');return false"><span class="dot" style="background:#1a3a1a"></span>Ping Pong</a></li>
+        <li><a href="#" onclick="br('burger');return false"><span class="dot" style="background:#2e2800"></span>Just Burger</a></li>
+        <li><a href="#" onclick="br('wave');return false"><span class="dot" style="background:#003366"></span>Wave</a></li>
+        <li><a href="#" onclick="br('simpl');return false"><span class="dot" style="background:#2c2c2c"></span>SIMPL</a></li>
+      </ul>
+    </div>
+
+    <div class="ssec" id="sm">
+      <div class="sl" onclick="tSec('sm')">Live Mart <span class="sca">▾</span></div>
+      <ul class="ssub">
+        <li><a href="#" onclick="go('mart',null,'all');return false"><span class="dot" style="background:var(--g2)"></span>All Products</a></li>
+        <li><a href="#" onclick="go('mart',null,'fmcg');return false"><span class="dot" style="background:#555"></span>FMCG Essentials</a></li>
+        <li><a href="#" onclick="go('mart',null,'jolly-sauces');return false"><span class="dot" style="background:#4a0e2a"></span>Jolly Sauces</a></li>
+        <li><a href="#" onclick="go('mart',null,'wave-drinks');return false"><span class="dot" style="background:#003366"></span>Wave Drinks</a></li>
+        <li><a href="#" onclick="go('mart',null,'simpl-products');return false"><span class="dot" style="background:#2c2c2c"></span>SIMPL Products</a></li>
+      </ul>
+    </div>
+
+    <div class="ssec" id="sr">
+      <div class="sl" onclick="tSec('sr')">Real Estate <span class="sca">▾</span></div>
+      <ul class="ssub">
+        <li><a href="#" onclick="go('re');return false"><span class="dot" style="background:#1a1a2e"></span>Properties</a></li>
+        <li><a href="#" onclick="go('re');return false"><span class="dot" style="background:#2d2d4e"></span>Commercial Spaces</a></li>
+        <li><a href="#" onclick="go('contact');return false"><span class="dot" style="background:var(--g1)"></span>Enquire Now</a></li>
+      </ul>
+    </div>
+
+    <div class="ssec" id="sg">
+      <div class="sl" onclick="tSec('sg')">Logistics <span class="sca">▾</span></div>
+      <ul class="ssub">
+        <li><a href="#" onclick="go('log');return false"><span class="dot" style="background:#2d2300"></span>Delivery Services</a></li>
+        <li><a href="#" onclick="go('log');return false"><span class="dot" style="background:#1a1500"></span>Fleet Management</a></li>
+        <li><a href="#" onclick="go('contact');return false"><span class="dot" style="background:var(--g1)"></span>Get a Quote</a></li>
+      </ul>
+    </div>
+
+    <div class="sl" onclick="go('about',this)">About Us</div>
+    <div class="sl" onclick="go('contact',this)">Contact</div>
+  </nav>
+</aside>
+
+<button class="ham" onclick="openSB()"><span></span><span></span><span></span></button>
+
+<main id="main">
+  <div id="tb">
+    <div class="tbc" id="crumb">Live Corps &nbsp;/&nbsp; <strong>Home</strong></div>
+    <div class="tba">
+      <a href="#" class="btn bl" onclick="go('mart');return false">Shop</a>
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Cart
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="pg active" id="pg-home">
+    <div class="hero">
+      <div class="htag">Live Corps Ltd. · Banani, Dhaka, Bangladesh</div>
+      <h1>Where<br>Bangladesh<br><em>Eats, Lives</em><br>& Grows</h1>
+      <p class="hdesc">A multi-division holding company spanning food & beverage, retail, real estate, and logistics — building Bangladesh's most loved brands.</p>
+      <div class="hcta">
+        <a href="#" class="btn bw" onclick="go('about');return false">Our Story</a>
+        <a href="#" class="btn bg" onclick="go('mart');return false">Visit Live Mart</a>
+      </div>
+    </div>
+    <div class="strip">
+      <div class="si"><div class="sn">4</div><div class="sl2">Divisions</div></div>
+      <div class="si"><div class="sn">8+</div><div class="sl2">Food Brands</div></div>
+      <div class="si"><div class="sn">BDT</div><div class="sl2">Currency</div></div>
+      <div class="si"><div class="sn">2026</div><div class="sl2">Est.</div></div>
+    </div>
+    <div class="dw">
+      <div class="slabel">Our Divisions</div>
+      <div class="stitle">Four Pillars of Growth</div>
+      <div class="dgrid">
+        <div class="dc" onclick="tSec('se');go('home')">
+          <div class="dbar"></div>
+          <div class="dtop"><div class="dnum">Division 01</div><div class="dtitle">Live Eats</div><div class="ddesc">Eight distinct food & beverage brands — from Japanese maki rolls to Caribbean flame grills.</div></div>
+          <div class="dbot"><span class="tag">Jolly</span><span class="tag">Box Biriyani</span><span class="tag">Dojo</span><span class="tag">Zuma Zura</span><span class="tag">Ping Pong</span><span class="tag">Just Burger</span><span class="tag">Wave</span><span class="tag">SIMPL</span></div>
+        </div>
+        <div class="dc" onclick="go('mart')">
+          <div class="dbar" style="background:#1a3a1a"></div>
+          <div class="dtop"><div class="dnum">Division 02</div><div class="dtitle">Live Mart</div><div class="ddesc">FMCG retail and premium mart. Products from our own brands and curated essentials.</div></div>
+          <div class="dbot"><span class="tag">FMCG</span><span class="tag">Jolly Sauces</span><span class="tag">Wave Drinks</span><span class="tag">SIMPL Products</span></div>
+        </div>
+        <div class="dc" onclick="go('re')">
+          <div class="dbar" style="background:#1a1a2e"></div>
+          <div class="dtop"><div class="dnum">Division 03</div><div class="dtitle">Live Real Estate</div><div class="ddesc">Premium residential and commercial properties across Dhaka's finest neighborhoods.</div></div>
+          <div class="dbot"><span class="tag" style="background:#eaeaf7;color:#1a1a2e">Properties</span><span class="tag" style="background:#eaeaf7;color:#1a1a2e">Commercial</span></div>
+        </div>
+        <div class="dc" onclick="go('log')">
+          <div class="dbar" style="background:#2d2300"></div>
+          <div class="dtop"><div class="dnum">Division 04</div><div class="dtitle">Live Logistics</div><div class="ddesc">End-to-end delivery and fleet management powering our brands and third-party operations.</div></div>
+          <div class="dbot"><span class="tag" style="background:#fdf5e0;color:#2d2300">Delivery</span><span class="tag" style="background:#fdf5e0;color:#2d2300">Fleet Mgmt</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND PAGE (dynamic) -->
+  <div class="pg" id="pg-brand"><div id="bh"></div><div id="bb"></div></div>
+
+  <!-- MART -->
+  <div class="pg" id="pg-mart">
+    <div class="mhero">
+      <h1>Live Mart</h1>
+      <p>Sauces, drinks, pantry staples and FMCG essentials — from our own brands and beyond.</p>
+      <div class="hcta"><a href="#" class="btn bw" onclick="go('contact');return false">Order Enquiry</a></div>
+    </div>
+    <div class="fbar">
+      <button class="ftab active" onclick="fM('all',this)">All</button>
+      <button class="ftab" onclick="fM('fmcg',this)">FMCG</button>
+      <button class="ftab" onclick="fM('jolly-sauces',this)">Jolly Sauces</button>
+      <button class="ftab" onclick="fM('wave-drinks',this)">Wave Drinks</button>
+      <button class="ftab" onclick="fM('simpl-products',this)">SIMPL</button>
+    </div>
+    <div class="pgrid" id="pg2"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="pg" id="pg-about">
+    <div class="asplit">
+      <div class="al">
+        <h2>Building Bangladesh's Most Loved Brands</h2>
+        <p>Live Corps Ltd. is a multi-brand holding company headquartered in Banani, Dhaka. We believe Bangladesh deserves world-class brands built right here — from street food to fine living.</p>
+        <p>From Japanese maki rolls to African flame grills, from premium real estate to last-mile logistics — we build businesses that last.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:16px">Founded 2026 · Banani, Dhaka · Bangladesh</p>
+      </div>
+      <div class="ar">
+        <div class="slabel">C-Suite Leadership</div>
+        <div class="stitle" style="font-size:24px;margin-bottom:0">The People Behind Live</div>
+        <div class="tgrid">
+          <div class="tc"><div class="tav" style="background:#0A2116">FK</div><div class="tn">Fahad Kowsar</div><div class="tr">Chief Executive Officer</div></div>
+          <div class="tc"><div class="tav" style="background:#1E6B3C">GN</div><div class="tn">Gazi Nashek</div><div class="tr">Chief Operating Officer</div></div>
+          <div class="tc"><div class="tav" style="background:#1E6B3C">SK</div><div class="tn">Shefat A. Khan</div><div class="tr">Chief Information Officer</div></div>
+          <div class="tc"><div class="tav" style="background:#2E9955">FZ</div><div class="tn">Farhana Zaman</div><div class="tr">Head of Product</div></div>
+          <div class="tc"><div class="tav" style="background:#2E9955">AA</div><div class="tn">Ahnaf Akif</div><div class="tr">Deputy GM</div></div>
+          <div class="tc"><div class="tav" style="background:#555">NA</div><div class="tn">Nachim Ahmed</div><div class="tr">General Manager</div></div>
+        </div>
+        <div class="ablock"><p>4th Floor, H-2, R-28, Block-K<br>Banani, Dhaka, Bangladesh<br><strong>livecorps.com</strong> · <strong>liveeats.com.bd</strong></p></div>
+      </div>
+    </div>
+
+    <!-- ORGANOGRAM -->
+    <div class="org-section">
+      <div class="slabel">Organization Structure</div>
+      <div class="stitle">Company Organogram</div>
+      <div class="org-wrap">
+        <div id="org-tree"></div>
+      </div>
+    </div>
+
+    <!-- GLOBAL REVIEWS on about page -->
+    <div class="rev-section" style="padding:48px 60px">
+      <div class="slabel">What People Say</div>
+      <div class="stitle">Customer Reviews</div>
+      <div class="rev-grid" id="global-reviews"></div>
+      <div class="rev-form">
+        <div class="rev-form-title">Share Your Experience</div>
+        <div class="fg" style="margin-bottom:14px">
+          <div class="fg2"><div class="fl">Your Name</div><input type="text" id="rev-name" placeholder="Your name"></div>
+          <div class="fg2"><div class="fl">Brand / Location</div><input type="text" id="rev-brand-inp" placeholder="e.g. Jolly, Banani"></div>
+        </div>
+        <div class="fl" style="margin-bottom:6px">Rating</div>
+        <div class="star-select" id="star-select">
+          <span onclick="setStar(1)" data-s="1">★</span>
+          <span onclick="setStar(2)" data-s="2">★</span>
+          <span onclick="setStar(3)" data-s="3">★</span>
+          <span onclick="setStar(4)" data-s="4">★</span>
+          <span onclick="setStar(5)" data-s="5">★</span>
+        </div>
+        <div class="fg2 full" style="margin-bottom:14px"><div class="fl">Your Review</div><textarea id="rev-text" placeholder="Tell us about your experience..."></textarea></div>
+        <button class="btn bs" onclick="submitReview()">Submit Review</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="pg" id="pg-contact">
+    <div class="csplit">
+      <div class="cl">
+        <h2>Get In Touch</h2>
+        <p>Whether you're a customer, partner, investor, or supplier — our team responds within 24 hours.</p>
+        <div class="crow"><div class="ci">📍</div><div><div class="cilabel">Registered Address</div><div class="cival">4th Floor, H-2, R-28, Block-K<br>Banani, Dhaka-1213, Bangladesh</div></div></div>
+        <div class="crow"><div class="ci">🌐</div><div><div class="cilabel">Website</div><div class="cival"><a href="https://livecorps.com" target="_blank">livecorps.com</a></div></div></div>
+        <div class="crow"><div class="ci">📧</div><div><div class="cilabel">General Enquiries</div><div class="cival"><a href="mailto:hello@livecorps.com">hello@livecorps.com</a></div></div></div>
+        <div class="crow"><div class="ci">📞</div><div><div class="cilabel">Phone / WhatsApp</div><div class="cival"><a href="tel:+8801700000000">+880 1700 000000</a></div></div></div>
+        <div class="crow"><div class="ci">👔</div><div><div class="cilabel">CEO</div><div class="cival">Fahad Kowsar<br><a href="mailto:fahad@livecorps.com">fahad@livecorps.com</a></div></div></div>
+        <div class="crow"><div class="ci">⚙️</div><div><div class="cilabel">COO</div><div class="cival">Gazi Nashek<br><a href="mailto:gazi@livecorps.com">gazi@livecorps.com</a></div></div></div>
+        <div class="crow"><div class="ci">💻</div><div><div class="cilabel">CIO</div><div class="cival">Shefat A. Khan<br><a href="mailto:shefat@livecorps.com">shefat@livecorps.com</a></div></div></div>
+      </div>
+      <div class="cr">
+        <h2>Send a Message</h2>
+        <p class="csub">We'll get back to you within one business day.</p>
+        <div class="fg">
+          <div class="fg2"><div class="fl">First Name</div><input type="text" placeholder="Rahim"></div>
+          <div class="fg2"><div class="fl">Last Name</div><input type="text" placeholder="Uddin"></div>
+          <div class="fg2"><div class="fl">Email</div><input type="email" placeholder="rahim@email.com"></div>
+          <div class="fg2"><div class="fl">Phone</div><input type="tel" placeholder="+880 1700 000000"></div>
+          <div class="fg2 full"><div class="fl">Subject</div>
+            <select>
+              <option>General Inquiry</option>
+              <option>Partnership / B2B</option>
+              <option>Real Estate Enquiry</option>
+              <option>Logistics Quote</option>
+              <option>Franchising</option>
+              <option>Media / Press</option>
+              <option>Careers</option>
+            </select>
+          </div>
+          <div class="fg2 full"><div class="fl">Message</div><textarea placeholder="Tell us how we can help..."></textarea></div>
+        </div>
+        <button class="btn bs" style="margin-top:16px;width:100%;justify-content:center;height:42px" onclick="T('Message sent — we\'ll respond within 24 hours.','green')">Send Message</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REAL ESTATE -->
+  <div class="pg" id="pg-re">
+    <div class="gh">
+      <h1>Live Real Estate</h1>
+      <p>Premium residential and commercial properties across Dhaka. We develop, lease, and manage.</p>
+      <div class="hcta"><a href="#" class="btn bw" onclick="go('contact');return false">Enquire Now</a></div>
+    </div>
+    <div class="sw">
+      <div class="slabel">What We Offer</div>
+      <div class="stitle">Our Services</div>
+      <div class="sgrid">
+        <div class="sc"><div class="si2">🏠</div><div class="stit">Residential</div><div class="sdesc">Premium apartments in Dhaka's most sought-after neighborhoods, designed for modern living.</div></div>
+        <div class="sc"><div class="si2">🏗️</div><div class="stit">Commercial Spaces</div><div class="sdesc">Grade-A office and retail spaces for businesses establishing their Dhaka footprint.</div></div>
+        <div class="sc"><div class="si2">📋</div><div class="stit">Property Management</div><div class="sdesc">End-to-end management including maintenance, tenant relations, and revenue optimization.</div></div>
+      </div>
+    </div>
+    <div class="ew">
+      <div class="ow">
+        <div class="ot">Property Enquiry</div>
+        <div class="os2">Our team responds within 24 hours.</div>
+        <div class="fg">
+          <div class="fg2"><div class="fl">Full Name</div><input type="text" placeholder="Your name"></div>
+          <div class="fg2"><div class="fl">Phone</div><input type="tel" placeholder="+880..."></div>
+          <div class="fg2"><div class="fl">Email</div><input type="email" placeholder="your@email.com"></div>
+          <div class="fg2"><div class="fl">Property Type</div><select><option>Residential</option><option>Commercial</option><option>Office Space</option></select></div>
+          <div class="fg2 full"><div class="fl">Requirements</div><textarea placeholder="Tell us what you're looking for..."></textarea></div>
+        </div>
+        <button class="btn bs" style="margin-top:16px" onclick="T('Enquiry submitted — we\'ll contact you shortly.','green')">Submit Enquiry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGISTICS -->
+  <div class="pg" id="pg-log">
+    <div class="gh lg">
+      <h1>Live Logistics</h1>
+      <p>Fast, reliable delivery and fleet management across Dhaka and beyond.</p>
+      <div class="hcta"><a href="#" class="btn bw" onclick="go('contact');return false">Get a Quote</a></div>
+    </div>
+    <div class="sw">
+      <div class="slabel">What We Offer</div>
+      <div class="stitle">Our Services</div>
+      <div class="sgrid">
+        <div class="sc"><div class="si2">🛵</div><div class="stit">Last-Mile Delivery</div><div class="sdesc">Same-day and scheduled delivery across Dhaka. Optimized routing for maximum speed.</div></div>
+        <div class="sc"><div class="si2">🚛</div><div class="stit">Fleet Management</div><div class="sdesc">Real-time tracking, maintenance scheduling, and driver management operations.</div></div>
+        <div class="sc"><div class="si2">📦</div><div class="stit">B2B Logistics</div><div class="sdesc">Bulk delivery solutions including FMCG distribution and restaurant supply chains.</div></div>
+      </div>
+    </div>
+    <div class="ew">
+      <div class="ow">
+        <div class="ot">Request a Quote</div>
+        <div class="os2">Fill in your requirements for a custom proposal.</div>
+        <div class="fg">
+          <div class="fg2"><div class="fl">Company</div><input type="text" placeholder="Your company"></div>
+          <div class="fg2"><div class="fl">Contact Person</div><input type="text" placeholder="Name"></div>
+          <div class="fg2"><div class="fl">Phone</div><input type="tel" placeholder="+880..."></div>
+          <div class="fg2"><div class="fl">Service Type</div><select><option>Last-Mile Delivery</option><option>Fleet Management</option><option>B2B Logistics</option></select></div>
+          <div class="fg2 full"><div class="fl">Requirements</div><textarea placeholder="Describe your logistics needs..."></textarea></div>
+        </div>
+        <button class="btn bs" style="margin-top:16px" onclick="T('Quote request submitted — we\'ll respond within 24 hours.','green')">Request Quote</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- CART PANEL -->
+<div id="cart-panel">
+  <div class="cp-head">
+    <div class="cp-title">Your Cart</div>
+    <button class="cp-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cp-items" id="cart-items">
+    <div class="cart-empty"><div class="cart-empty-ico">🛒</div><div class="cart-empty-t">Cart is empty</div><div class="cart-empty-s">Add items from any brand menu</div></div>
+  </div>
+  <div class="cp-foot">
+    <div class="cp-subtotal">
+      <div class="cp-subtotal-label">Total</div>
+      <div class="cp-subtotal-val" id="cart-total">৳0</div>
+    </div>
+    <div class="cp-note">Delivery calculated at checkout · Min. order ৳200</div>
+    <button class="cp-checkout" onclick="openCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div id="checkout-modal">
+  <div class="cm-box">
+    <div class="cm-head">
+      <div class="cm-title">Checkout</div>
+      <button class="cm-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="cm-body">
+
+      <div class="cm-section">
+        <div class="cm-sh">Order Summary</div>
+        <div class="order-summary" id="checkout-summary"></div>
+      </div>
+
+      <div class="cm-section">
+        <div class="cm-sh">Delivery Details</div>
+        <div class="fg">
+          <div class="fg2"><div class="fl">Full Name</div><input type="text" id="co-name" placeholder="Your full name"></div>
+          <div class="fg2"><div class="fl">Phone</div><input type="tel" id="co-phone" placeholder="+880 1700 000000"></div>
+          <div class="fg2 full"><div class="fl">Delivery Address</div><input type="text" id="co-addr" placeholder="Street, Area, Dhaka"></div>
+          <div class="fg2"><div class="fl">Area</div>
+            <select id="co-area">
+              <option>Banani</option><option>Gulshan</option><option>Dhanmondi</option><option>Uttara</option><option>Mirpur</option><option>Motijheel</option><option>Wari</option><option>Other</option>
+            </select>
+          </div>
+          <div class="fg2"><div class="fl">Delivery Time</div>
+            <select>
+              <option>ASAP (~30 min)</option><option>Within 1 hour</option><option>Schedule for later</option>
+            </select>
+          </div>
+          <div class="fg2 full"><div class="fl">Special Instructions (optional)</div><textarea id="co-note" placeholder="Spice level, gate instructions..."></textarea></div>
+        </div>
+      </div>
+
+      <div class="cm-section">
+        <div class="cm-sh">Payment Method</div>
+        <div class="pay-opts">
+          <div class="pay-opt sel" onclick="selPay(this,'bkash')"><div class="pay-opt-icon">📱</div><div class="pay-opt-name">bKash</div><div class="pay-opt-sub">Mobile banking</div></div>
+          <div class="pay-opt" onclick="selPay(this,'nagad')"><div class="pay-opt-icon">💳</div><div class="pay-opt-name">Nagad</div><div class="pay-opt-sub">Mobile banking</div></div>
+          <div class="pay-opt" onclick="selPay(this,'card')"><div class="pay-opt-icon">💰</div><div class="pay-opt-name">Card</div><div class="pay-opt-sub">Visa / MasterCard</div></div>
+          <div class="pay-opt" onclick="selPay(this,'rocket')"><div class="pay-opt-icon">🚀</div><div class="pay-opt-name">Rocket</div><div class="pay-opt-sub">DBBL Mobile</div></div>
+          <div class="pay-opt" onclick="selPay(this,'cod')"><div class="pay-opt-icon">💵</div><div class="pay-opt-name">Cash on Delivery</div><div class="pay-opt-sub">Pay at door</div></div>
+        </div>
+        <div class="pay-details" id="pay-details-bkash" style="display:block">Send payment to bKash Merchant: <strong>01700-000000</strong><br>Use "Send Money" → enter amount → reference: your phone number.</div>
+        <div class="pay-details" id="pay-details-nagad">Send payment to Nagad: <strong>01700-000000</strong><br>Merchant payment → enter amount → reference: your phone number.</div>
+        <div class="pay-details" id="pay-details-card">You will receive a secure payment link via SMS after order confirmation.</div>
+        <div class="pay-details" id="pay-details-rocket">Rocket number: <strong>01700-000000-6</strong><br>Send money → enter amount → reference: your phone number.</div>
+        <div class="pay-details" id="pay-details-cod">Pay in cash when your order arrives. Exact change appreciated.</div>
+      </div>
+
+      <button class="cm-submit" onclick="placeOrder()">Place Order →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── BRAND DATA ──────────────────────────────────────────────────
+const BD={
+  jolly:{name:'Jolly',tagline:'Chicken is the canvas. Sauce is the art.',bg:'#4a0e2a',i:'J',label:'Live Eats · Southern Fried Chicken',emoji:'🍗',
+    manifesto:'Jolly is built on a simple belief: Chicken is the canvas — Sauce is the art. Eight sauces. Eight personalities. Eight reasons to come back again. From bold and fiery to smooth and addictive, every Jolly sauce turns every bite into a discovery. We deliver joy, flavor, and discovery in every bite.',
+    cats:[
+      {h:'Signature Chicken',items:[{n:'Southern Fried — 2pc',d:'Classic golden southern-style fried chicken',p:'৳220'},{n:'Southern Fried — 4pc',d:'Perfect for sharing',p:'৳380'},{n:'Southern Fried — 8pc',d:'The full platter experience',p:'৳680'},{n:'Southern Fried — Bucket',d:'The ultimate bucket',p:'৳980'},{n:'Flaming Hot Wings — 4pc',d:'African rub, fiery heat',p:'৳260'},{n:'Flaming Hot Wings — 6pc',d:null,p:'৳360'},{n:'Fried Chicken Tenders — 2pc',d:'Juicy crispy tenders',p:'৳190'},{n:'Fried Chicken Tenders — 4pc',d:null,p:'৳340'},{n:'Signature Fried Chicken Burger',d:'Crispy chicken breast, Asian sauce, coleslaw, spicy mayo, brioche bun',p:'৳380'},{n:'Homemade Chilli-Cheese Cauliflower Nuggets',d:'Gooey, spicy veggie nuggets with fingerlicking sauce',p:'৳220'},{n:'Hot Brownie with Soft Ice',d:'Hot chocolate brownie topped with soft serve',p:'৳180'}]},
+      {h:'Signature Sauces (8 Flavors)',items:[{n:'Spicy Kimchi Mayo',d:'Korean heat meets Japanese creaminess',p:'৳40'},{n:'Laal Jhal Sweet Sour',d:'Deshi sweet & sour with a kick',p:'৳40'},{n:'Bombay Mango Achari',d:'Tangy mango pickle, subcontinent-style',p:'৳40'},{n:'Signature White Sauce',d:'House creamy classic',p:'৳40'},{n:'Spicy Achar Mayo',d:'Pickle-forward heat',p:'৳40'},{n:'Kashmiri Curry Sauce',d:'Warming Kashmiri spice blend',p:'৳40'},{n:'Tamarind Ketchup',d:'Sweet, tangy, unmistakably deshi',p:'৳40'},{n:'Sour Cream',d:'Cool and classic',p:'৳40'}]},
+      {h:'Sides',items:[{n:'Jolly Fries — Small',d:'Crispy seasoned shoestring fries in a bag',p:'৳120'},{n:'Jolly Fries — Large',d:null,p:'৳180'},{n:'Dirrty Fries — Small',d:'Loaded fries with 2-3 toppings, shake at home',p:'৳200'},{n:'Dirrty Fries — Large',d:null,p:'৳280'},{n:'Battered Onion Flower',d:'Whole onion in batter, fried crispy, 2 sauces',p:'৳250'},{n:'Corn Fritters — Small',d:'Fried corn strips in special salt, 2 sauces',p:'৳150'},{n:'Corn Fritters — Large',d:null,p:'৳220'}]}
+    ]},
+  box:{name:'Box Biriyani',tagline:'Square box. Round flavor. Zero compromise.',bg:'#7c5200',i:'B',label:'Live Eats · Biriyani Specialists',emoji:'🍛',
+    manifesto:'Box Biriyani takes the soul of Bangladeshi biriyani culture and fits it into a square built for now. No unnecessary oil. No post-meal regret. Just balanced spice, real meat, perfect rice separation. Your order lands in your hands in 30 minutes. Hot. Fresh. Locked in flavor. Bangladesh cooked it. The world eats it.',
+    cats:[
+      {h:'Box Items — All Boneless (Square Box, 2 Sizes)',items:[{n:'Beef Tehari Classic — Small',d:'Your everyday biriyani, easy to eat, happiness on a spoon',p:'৳220'},{n:'Beef Tehari Classic — Large',d:null,p:'৳380'},{n:'Morog Polao — Small',d:null,p:'৳240'},{n:'Morog Polao — Large',d:null,p:'৳400'},{n:'Chicken Tikka Masala Biriyani — Small',d:null,p:'৳260'},{n:'Chicken Tikka Masala Biriyani — Large',d:null,p:'৳420'},{n:'Hariyali Chicken Biriyani — Small',d:null,p:'৳250'},{n:'Kopta Polao — Small',d:null,p:'৳230'},{n:'Keema Biriyani — Small',d:null,p:'৳210'}]},
+      {h:'Biriyani by KG — Motka Claypot (3 Sizes)',items:[{n:'Classic Beef Tehari — 500g',d:'Luxury motka claypot biriyani for home',p:'৳480'},{n:'Mutton Biriyani — 500g',d:null,p:'৳620'},{n:'Kacchi Biriyani — 500g',d:null,p:'৳720'},{n:'Classic Beef Tehari — 1kg',d:null,p:'৳880'},{n:'Mutton Biriyani — 1kg',d:null,p:'৳1100'}]},
+      {h:'Bengali Sherbets',items:[{n:'Classic Pink Sherbet',d:'Sweet and classical Bengali sherbet, bottled and ice cold',p:'৳80'},{n:'Classic Lebu Sherbet',d:null,p:'৳70'},{n:'Classic Badami Sherbet',d:null,p:'৳90'},{n:'Sweet Lassi',d:null,p:'৳100'},{n:'Salty Lassi (Ayran)',d:null,p:'৳100'}]},
+      {h:'Desserts',items:[{n:'Shahi Tukra',d:'Classic Bengali bread pudding dessert',p:'৳120'},{n:'Shahi Payesh',d:'Creamy rice pudding',p:'৳110'}]}
+    ]},
+  dojo:{name:'Dojo 道場',tagline:'Cooked. Bold. Everywhere.',bg:'#1a0a00',i:'D',label:'Live Eats · Japanese Fusion Maki Rolls',emoji:'🍣',
+    manifesto:'Dojo is the world\'s first Japanese fusion Maki Roll brand built entirely around cooked perfection. Every single roll is crafted with the soul of authentic Japanese technique and the boldness of global fusion — fully cooked, packed with flavours, and completely safe for everybody. Not a compromise. A revolution on a plate.',
+    cats:[
+      {h:'Maki Rolls',items:[{n:'Mango California',d:'Crispy shrimp/avocado inside, topped with mango tartar & spicy mayo',p:'৳380'},{n:'Spicy Salmon Flambée',d:'Mango/avocado inside, salmon outside glazed with teriyaki & torched',p:'৳420'},{n:'Tuna & Cheese',d:'Veggie/avocado inside, sliced avo outside, sesame sauce & spicy mayo',p:'৳390'},{n:'Bang Bang Shrimp',d:'Veggie/avocado inside, fried shrimp on top, bang bang sauce',p:'৳400'},{n:'Fish & Chips Roll',d:'British crispy fish, rolled Japanese style',p:'৳360'},{n:'Tempura Shrimp Roll',d:'Crispy shrimp & zesty flavour',p:'৳370'},{n:'Surf & Turf Steak Roll',d:'Shrimp inside, skirt steak flambéed outside, unagi sauce, crispy onion',p:'৳480'},{n:'Wiener Schnitzel Roll',d:'Chicken schnitzel inside, sweet onion jam',p:'৳410'}]},
+      {h:'Sushi Burrito (Futo Maki)',items:[{n:'Bulgogi Beef Sushirito',d:'Bulgogi beef, spring onion, lettuce, carrots, unagi sauce & garlic mayo',p:'৳440'},{n:'Teriyaki Chicken Sushirito',d:'Grilled teriyaki chicken, lettuce, carrots, teriyaki glaze & crispy onion',p:'৳420'},{n:'Crispy Shrimp Sushirito',d:'Large hand roll burrito style',p:'৳430'}]},
+      {h:'Rice Bowls',items:[{n:'Hawaii Bowl',d:'Colorful poke-style bowl, cooked, fresh components, best sauces',p:'৳340'},{n:'Katsu Chicken Bowl',d:null,p:'৳320'},{n:'Salmon Teriyaki Bowl',d:null,p:'৳380'},{n:'Bulgogi Bowl',d:null,p:'৳360'},{n:'Bang Bang Shrimp Bowl',d:null,p:'৳350'}]},
+      {h:'Onigiri (Snack)',items:[{n:'Creamy Tuna Onigiri',d:'Small snack item, Japanese rice triangle',p:'৳160'},{n:'Pulled Creamy Chicken Onigiri',d:null,p:'৳160'}]}
+    ]},
+  zuma:{name:'Zuma Zura',tagline:'African Flame. Caribbean Soul.',bg:'#5a1a00',i:'Z',label:'Live Eats · Fire & Grill',emoji:'🔥',
+    manifesto:'Zuma Zura was born from flame. From the smoky grills of West Africa, from the rhythm and heat of the Caribbean islands. We take chicken, honest and simple, and awaken it with ancestral spices, charcoal fire, and fearless seasoning. No unnecessary garnish. No inflated pricing. Just real grilled chicken. Juicy. Nutrient-preserved. Flame-seared.',
+    cats:[
+      {h:'ZUMA — African Flame',items:[{n:'Peri Peri Flame Grilled Chicken — Half',d:'Angola-style, yellow rub, heavy spice marinade',p:'৳380'},{n:'Peri Peri Flame Grilled Chicken — Full',d:null,p:'৳680'},{n:'Yassa Poulet Flame Grilled — Half',d:'Tangy with caramelized onions, Senegalese dish',p:'৳400'},{n:'Yassa Poulet — Full',d:null,p:'৳720'},{n:'Red Fire Wings — 5pc',d:'Super hot African rub',p:'৳320'},{n:'Red Fire Wings — 8pc',d:null,p:'৳480'}]},
+      {h:'ZUMA Sides',items:[{n:'Joloff Rice',d:'Classic Nigerian Joloff rice, rich and colorful',p:'৳160'},{n:'Peri Peri Roast Potatoes',d:'Potatoes in peri peri marinade, herbs and texture',p:'৳140'},{n:'Mixed Herb Salad',d:'Similar to coleslaw, less creamy',p:'৳110'}]},
+      {h:'ZURA — Caribbean Charr',items:[{n:'Charcoal Grilled Chicken Creole — Half',d:'Creole style marination, lots of herbs, flame grilled',p:'৳390'},{n:'Charcoal Grilled Chicken Creole — Full',d:null,p:'৳700'},{n:'Jamaican Jerk Chicken',d:'Tons of flavour, chicken legs, 2 legs per portion',p:'৳440'},{n:'Hot Honey Wings — 5pc',d:'Sweet and tangy, Caribbean style',p:'৳300'},{n:'Hot Honey Wings — 8pc',d:null,p:'৳460'}]},
+      {h:'ZURA Sides & Sauces',items:[{n:'Dirrty Rice',d:'Dominican style with black peas, coconut & cinnamon',p:'৳150'},{n:'Caribbean Beans',d:'Black, kidney and birds eye peas in thick gravy',p:'৳130'},{n:'Lemony Wedges',d:'Homemade potato wedges, lemony zest',p:'৳140'},{n:'Hot Peri Peri Sauce',d:null,p:'৳50'},{n:'Sweet & Tangy Yassa Sauce',d:null,p:'৳50'}]},
+      {h:'Desserts',items:[{n:'Milk Tart with Cinnamon',d:'Creamy milk tarte, cinnamon sugar on top',p:'৳150'},{n:'Puff Puff',d:'Fried donut balls coated with sugar mixture',p:'৳120'}]}
+    ]},
+  ping:{name:'Ping Pong',tagline:'Eat. Rally. Repeat.',bg:'#1a3a1a',i:'P',label:'Live Eats · Chinese Fusion + Play',emoji:'🏓',
+    manifesto:'PING PONG is not a restaurant. It\'s the evolution of how we gather in the 21st century. Old School Chinese recipes, cooked just for you — while you play ping pong waiting for your food. Where food culture meets play culture. Elevated fast-casual Chinese food. Design-forward interiors. Live ping pong at the center of every space.',
+    cats:[
+      {h:'Mains',items:[{n:'Kung Pao Chicken',d:'Classic Sichuan-style with peanuts and chilli',p:'৳340'},{n:'Sweet and Sour Chicken',d:'Classic Chinese takeaway favourite',p:'৳320'},{n:'Ginger Lemongrass Chicken',d:'Fragrant and refreshing',p:'৳330'},{n:'General Tso\'s Chicken',d:'Crispy, sweet, slightly spicy',p:'৳350'},{n:'Chinese Fried Chicken',d:'Bone-in fried chicken, Chinese spices',p:'৳320'},{n:'Gong Bao Beef',d:'Stir-fried beef with Sichuan pepper',p:'৳380'},{n:'Khing / Crispy Chilli Beef',d:'Crispy beef strips in chilli sauce',p:'৳390'},{n:'Honey Garlic Shrimp',d:'Sweet, sticky, perfectly glazed',p:'৳420'},{n:'Spicy Mapo Tofu',d:'Silken tofu in spicy Sichuan sauce',p:'৳300'}]},
+      {h:'Noodles',items:[{n:'Beef Chao Fan',d:'Like drunken sticky noodles',p:'৳310'},{n:'Tan Tan Noodles',d:'Sesame-peanut spicy noodles',p:'৳300'},{n:'Shrimp Lo Mein',d:'Classic egg noodles with shrimp',p:'৳340'},{n:'Chow Mein Classic',d:'Crispy fried noodles with vegetables',p:'৳290'}]},
+      {h:'Soupy',items:[{n:'Beef Noodle Soup',d:'Rich broth, tender beef, hand-cut noodles',p:'৳350'}]},
+      {h:'Rice',items:[{n:'Kimchi Fried Rice',d:'Korean-Chinese fusion, house kimchi',p:'৳260'},{n:'Garlic Fried Rice',d:'Wok-fried with fragrant garlic',p:'৳240'}]},
+      {h:'Desserts',items:[{n:'Ice Mochi — Matcha',d:'Japanese mochi ice cream, various flavours',p:'৳120'},{n:'Ice Mochi — Strawberry',d:null,p:'৳120'},{n:'Ice Mochi — Mango',d:null,p:'৳120'}]}
+    ]},
+  burger:{name:'Just Burger',tagline:'No fluff. No filler. Just Burger.',bg:'#2e2800',i:'JB',label:'Live Eats · Smash Burgers & More',emoji:'🍔',
+    manifesto:'At Just Burger, we don\'t do "fancy." We do right. Everyone deserves a meal that hits the spot without breaking the bank. The Smashburger that\'s all crust and soul. The Crispy Chicken that stays crunchy until the last bite. The Surf & Turf for when you\'re feeling a little extra. No fluff. No filler. Just Burger.',
+    cats:[
+      {h:'Burgers',items:[{n:'Smash Burger — Single',d:'100g patty, smashed onions, cheese, signature sauce, mustard caviar, brioche bun',p:'৳320'},{n:'Smash Burger — Double',d:'Two 100g patties, double the soul',p:'৳460'},{n:'BBQ Steak Burger',d:'Chopped grill steak, Swiss cheese, onion/bacon jam, lettuce, smoky BBQ sauce',p:'৳480'},{n:'Surf & Turf Burger',d:'Patty + grilled shrimp in cajun dressing, tomato salsa, burger sauces',p:'৳520'},{n:'Angry Chicken Burger',d:'Fried chicken filet in homemade hot sauce, jalapeño, onion, black bun',p:'৳380'},{n:'Butter Chicken Burger',d:'Classic dish transformed into a burger',p:'৳360'},{n:'Paw Chicken Slider — 1pc',d:'Potato bun, fried chicken tender, homemade sauce, coleslaw',p:'৳150'},{n:'Paw Chicken Sliders — 3pc',d:null,p:'৳400'},{n:'Paw Chicken Sliders — 6pc',d:null,p:'৳750'}]},
+      {h:'Sides',items:[{n:'Sweet Potato Fries',d:null,p:'৳150'},{n:'Okra Fries',d:'Crispy fried okra',p:'৳130'},{n:'Waffle Fries',d:null,p:'৳150'},{n:'Garlic / Herbs / Cheese Wedges',d:null,p:'৳160'},{n:'French Fries — Regular',d:null,p:'৳110'}]},
+      {h:'Drinks',items:[{n:'Mojo',d:'Deshi carbonated drink',p:'৳60'},{n:'Lemu',d:'Local lemon drink',p:'৳60'},{n:'Wave Cold Brew',d:'From our Wave brand',p:'৳160'}]}
+    ]},
+  wave:{name:'Wave',tagline:'Ride the Wave. Stay Fresh. Keep Moving.',bg:'#003366',i:'W',label:'Live Eats & Mart · Cold Drinks Brand',emoji:'🌊',
+    manifesto:'For the youth of Bangladesh — Wave isn\'t just a drink; it\'s a movement. Providing the cold relief needed for the hustle and the spark for the next big idea. We aren\'t a "premium" brand for the few; we are the pulse of the many. When the city burns: We are your sub-zero reset.',
+    cats:[
+      {h:'Fresh Drinks',items:[{n:'Mango / Malta Margarita',d:'With a spicy rim, pre-bottled, made fresh daily',p:'৳120'},{n:'Coco / Lime',d:null,p:'৳110'},{n:'Watermelon Boost',d:null,p:'৳120'},{n:'Pina Colada',d:null,p:'৳130'},{n:'Tamarind / Jaggery',d:null,p:'৳100'},{n:'Daily Vit Shot',d:'75ml ginger/lemon/honey/orange/turmeric/pepper juice shot',p:'৳80'}]},
+      {h:'Specialty Drinks',items:[{n:'Kopi — The OG Coffee',d:'Classic kopi with condensed milk',p:'৳140'},{n:'Wave Cold Brew',d:'24-hour cold brew, smooth & bold',p:'৳160'},{n:'Iced Gulapi Coffee',d:'Iced coffee with Rooh Afzah milk',p:'৳150'},{n:'Malay Coffee',d:'Sweet milk coffee drink',p:'৳140'},{n:'Coconut Matcha',d:'Green / white creamy drink, coconut base',p:'৳180'},{n:'Sweet Lassi',d:null,p:'৳110'},{n:'Salty Lassi (Ayran)',d:null,p:'৳110'}]},
+      {h:'Bites & Sweets',items:[{n:'Cookie to Go (Biscoot) — Chocolate Chip',d:'Fresh-baked cookie, 2 kinds daily',p:'৳90'},{n:'Cookie to Go — Nuts',d:null,p:'৳90'},{n:'Custard Soft Serve',d:'Creamy, cheap, flavourful in a cup',p:'৳110'},{n:'Cookie Sando',d:'Upon request, 2 cookies with cream',p:'৳180'}]}
+    ]},
+  simpl:{name:'SIMPL',tagline:'Real Ingredients. Honest Flavors.',bg:'#2c2c2c',i:'S',label:'Live Eats × Live Mart · FMCG & Pantry Brand',emoji:'🫙',
+    manifesto:'SIMPL is built on the belief that good food starts with good ingredients. No complicated formulas. No artificial shortcuts. Just pure, honest pantry essentials crafted for the home cook and food lover. From herb oils to spice blends — SIMPL is the foundation every kitchen deserves.',
+    cats:[
+      {h:'Herb Oils',items:[{n:'Basil Infused Olive Oil',d:'250ml, cold-pressed base',p:'৳320'},{n:'Chilli Garlic Oil',d:'250ml, deshi-inspired heat',p:'৳290'},{n:'Turmeric Coconut Oil',d:'250ml, golden & fragrant',p:'৳310'}]},
+      {h:'Spice Blends',items:[{n:'Biriyani Spice Mix',d:'100g, restaurant-grade blend',p:'৳180'},{n:'Seekh Kebab Masala',d:'100g, aromatic & smoky',p:'৳170'},{n:'All-Purpose Baharat',d:'100g, Middle Eastern blend',p:'৳190'}]},
+      {h:'Sauces & Pickles',items:[{n:'Tamarind Chutney',d:'200ml, tangy & sweet',p:'৳150'},{n:'Mango Pickle',d:'300ml jar, sun-dried style',p:'৳160'},{n:'Green Chilli Paste',d:'200ml, fresh-ground',p:'৳130'}]}
+    ]}
+};
+
+// ── MART PRODUCTS ───────────────────────────────────────────────
+const PR=[
+  {n:'Jolly Spicy Kimchi Mayo',c:'jolly-sauces',e:'🫙',d:'Korean-inspired sauce, 250ml',p:'৳180'},
+  {n:'Jolly Tamarind Ketchup',c:'jolly-sauces',e:'🫙',d:'Tangy deshi classic, 250ml',p:'৳160'},
+  {n:'Jolly Mango Achari',c:'jolly-sauces',e:'🫙',d:'Bombay pickle sauce, 250ml',p:'৳170'},
+  {n:'Jolly Laal Jhal Sauce',c:'jolly-sauces',e:'🫙',d:'Sweet-sour heat, 250ml',p:'৳160'},
+  {n:'Wave Cold Brew — 6 Pack',c:'wave-drinks',e:'🥤',d:'250ml cans, ready to drink',p:'৳680'},
+  {n:'Wave Passion Cooler — 6 Pack',c:'wave-drinks',e:'🥤',d:'300ml bottles, tropical blend',p:'৳620'},
+  {n:'Wave Coconut Matcha — 4 Pack',c:'wave-drinks',e:'🍵',d:'Green creamy drink, coconut base',p:'৳540'},
+  {n:'SIMPL Biriyani Spice Mix',c:'simpl-products',e:'🌿',d:'100g, restaurant-grade',p:'৳180'},
+  {n:'SIMPL Chilli Garlic Oil',c:'simpl-products',e:'🫙',d:'250ml cold-pressed base',p:'৳290'},
+  {n:'SIMPL Tamarind Chutney',c:'simpl-products',e:'🫙',d:'200ml, sweet & tangy',p:'৳150'},
+  {n:'SIMPL Baharat Blend',c:'simpl-products',e:'🌿',d:'Middle Eastern spice 100g',p:'৳190'},
+  {n:'Premium Basmati Rice 1kg',c:'fmcg',e:'🍚',d:'Long grain, fragrant',p:'৳220'},
+  {n:'Refined Sunflower Oil 1L',c:'fmcg',e:'🫗',d:'Pure grade cooking oil',p:'৳180'},
+  {n:'Mixed Masala Pack',c:'fmcg',e:'🌶️',d:'10 essential spices',p:'৳250'},
+  {n:'Organic Turmeric Powder',c:'fmcg',e:'🟡',d:'100g, natural ground',p:'৳90'}
+];
+
+const CL={'fmcg':'FMCG','jolly-sauces':'Jolly','wave-drinks':'Wave','simpl-products':'SIMPL'};
+const PL={home:'Home',brand:'Brand',mart:'Live Mart',about:'About Us',contact:'Contact',re:'Real Estate',log:'Logistics'};
+
+// ── CART STATE ──────────────────────────────────────────────────
+let cart=[];
+let selectedRating=0;
+let selectedPayment='bkash';
+
+// ── REVIEWS DATA ────────────────────────────────────────────────
+let reviews=[
+  {name:'Tanvir H.',brand:'Jolly, Banani',rating:5,text:'The sauce variety is next level! Spicy Kimchi Mayo with the Southern Fried is absolutely incredible. Came back 3 times this week already.',date:'Apr 2026',av:'TH'},
+  {name:'Sadia R.',brand:'Box Biriyani',rating:5,text:'Finally! A biriyani that\'s light on oil but packed with flavor. The Kacchi in the claypot is festival-worthy. Perfect for home delivery.',date:'Apr 2026',av:'SR'},
+  {name:'Arif K.',brand:'Dojo 道場',rating:5,text:'The Surf & Turf Steak Roll blew my mind. As someone who was hesitant about cooked sushi — Dojo has completely won me over. Exceptional.',date:'Mar 2026',av:'AK'},
+  {name:'Nadia B.',brand:'Just Burger',rating:4,text:'Smash Burger single hit every note. Perfectly smashed, crispy edges, great sauce. Will definitely order the double next time.',date:'Mar 2026',av:'NB'},
+  {name:'Rafi M.',brand:'Wave',rating:5,text:'The Iced Gulapi Coffee is my new daily ritual. Love that it uses Rooh Afzah. Genuinely refreshing and unique. Please never remove it!',date:'Apr 2026',av:'RM'},
+  {name:'Tasnim A.',brand:'Zuma Zura',rating:5,text:'Jamaican Jerk Chicken is the real deal. Authentic flavors, charcoal-kissed, generous portion. This is the best grilled chicken in Dhaka.',date:'Apr 2026',av:'TA'}
+];
+
+function renderReviews(){
+  document.getElementById('global-reviews').innerHTML=reviews.map(r=>`
+    <div class="rev-card">
+      <div class="rev-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+      <div class="rev-text">"${r.text}"</div>
+      <div class="rev-author">
+        <div class="rev-av">${r.av}</div>
+        <div><div class="rev-name">${r.name}</div><div class="rev-brand-tag">${r.brand}</div><div class="rev-date">${r.date}</div></div>
+      </div>
+    </div>`).join('');
+}
+
+function setStar(n){
+  selectedRating=n;
+  document.querySelectorAll('.star-select span').forEach((s,i)=>{
+    s.classList.toggle('lit',i<n);
+  });
+}
+
+function submitReview(){
+  const name=document.getElementById('rev-name').value.trim();
+  const brand=document.getElementById('rev-brand-inp').value.trim();
+  const text=document.getElementById('rev-text').value.trim();
+  if(!name||!text||selectedRating===0){T('Please fill name, review and select a rating.','');return;}
+  reviews.unshift({name,brand:brand||'Live Eats',rating:selectedRating,text,date:'Apr 2026',av:name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()});
+  renderReviews();
+  document.getElementById('rev-name').value='';
+  document.getElementById('rev-brand-inp').value='';
+  document.getElementById('rev-text').value='';
+  setStar(0);
+  T('Thank you for your review!','green');
+}
+
+// ── ORGANOGRAM ──────────────────────────────────────────────────
+function buildOrg(){
+  const tree=document.getElementById('org-tree');
+  tree.innerHTML=`
+    <div class="org-tree">
+      <!-- CEO -->
+      <div class="org-level">
+        <div class="org-node ceo"><div class="on-name">Fahad Kowser</div><div class="on-title">CEO</div></div>
+      </div>
+      <div class="org-connector"></div>
+      <!-- L1 -->
+      <div style="position:relative;width:100%">
+        <div style="display:flex;justify-content:center;gap:0">
+          <div style="flex:1;border-top:1.5px solid #ddd;border-right:1.5px solid #ddd;height:24px;margin-left:20%"></div>
+          <div style="flex:1;border-top:1.5px solid #ddd;height:24px"></div>
+          <div style="flex:1;border-top:1.5px solid #ddd;height:24px"></div>
+          <div style="flex:1;border-top:1.5px solid #ddd;border-left:1.5px solid #ddd;height:24px;margin-right:20%"></div>
+        </div>
+      </div>
+      <div class="org-level" style="gap:8px;flex-wrap:wrap">
+        <div class="org-child-col">
+          <div class="org-node cxo"><div class="on-name">Gazi Nashek</div><div class="on-title">COO</div></div>
+          <div class="org-connector"></div>
+          <div style="display:flex;gap:8px;justify-content:center">
+            <div class="org-child-col">
+              <div class="org-node" style="min-width:110px"><div class="on-name">Peu Das Deowan</div><div class="on-title">Accounts</div></div>
+            </div>
+            <div class="org-child-col">
+              <div class="org-node" style="min-width:120px"><div class="on-name">Nachim Ahmed</div><div class="on-title">Gen. Manager</div></div>
+              <div class="org-connector"></div>
+              <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+                <div class="org-child-col"><div class="org-node" style="min-width:90px"><div class="on-name">Dipu</div><div class="on-title">Sales</div></div></div>
+                <div class="org-child-col"><div class="org-node" style="min-width:110px"><div class="on-name">Sanjida K. Akhi</div><div class="on-title">Admin</div></div></div>
+                <div class="org-child-col">
+                  <div class="org-node" style="min-width:115px"><div class="on-name">Shafin A. Nihal</div><div class="on-title">Lead Coord.</div></div>
+                  <div class="org-connector"></div>
+                  <div class="org-node" style="min-width:115px"><div class="on-name">Tonmoy</div><div class="on-title">Jr. Exec. (Coord.)</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="org-child-col">
+          <div class="org-node cxo"><div class="on-name">Shefat A. Khan</div><div class="on-title">CIO</div></div>
+          <div class="org-connector"></div>
+          <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+            <div class="org-child-col">
+              <div class="org-node" style="min-width:100px"><div class="on-name">Tech Dept.</div><div class="on-title">Department</div></div>
+              <div class="org-connector"></div>
+              <div class="org-node" style="min-width:110px"><div class="on-name">Rifat B.A. Rohit</div><div class="on-title">Tech Head</div></div>
+              <div class="org-connector"></div>
+              <div class="org-node" style="min-width:130px"><div class="on-name">Mahmudul H. Sumon</div><div class="on-title">Jr. Exec. (Tech)</div></div>
+            </div>
+            <div class="org-child-col">
+              <div class="org-node" style="min-width:90px"><div class="on-name">Civil Dept.</div><div class="on-title">Department</div></div>
+              <div class="org-connector"></div>
+              <div class="org-node" style="min-width:115px"><div class="on-name">Golap Hasan</div><div class="on-title">Exec. & CIO Asst.</div></div>
+            </div>
+            <div class="org-child-col">
+              <div class="org-node" style="min-width:110px"><div class="on-name">Supply Chain</div><div class="on-title">Department</div></div>
+              <div class="org-connector"></div>
+              <div class="org-node" style="min-width:120px"><div class="on-name">Palash Sutradhar</div><div class="on-title">SC Manager</div></div>
+              <div class="org-connector"></div>
+              <div class="org-node" style="min-width:100px"><div class="on-name">Romiz Raza</div><div class="on-title">Sr. Executive</div></div>
+              <div class="org-connector"></div>
+              <div class="org-node" style="min-width:120px"><div class="on-name">Delowar H. Raju</div><div class="on-title">Jr. Executive</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="org-child-col">
+          <div class="org-node cxo"><div class="on-name">Farhana Zaman</div><div class="on-title">Head of Product</div></div>
+          <div class="org-connector"></div>
+          <div class="org-node" style="min-width:110px"><div class="on-name">Dominic</div><div class="on-title">Head Chef</div></div>
+        </div>
+        <div class="org-child-col">
+          <div class="org-node cxo"><div class="on-name">Ahnaf Akif</div><div class="on-title">DGM</div></div>
+          <div class="org-connector"></div>
+          <div class="org-node" style="min-width:110px"><div class="on-name">Senior Manager</div><div class="on-title">— (TBD)</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ── NAVIGATION ──────────────────────────────────────────────────
+function go(p,el,mf){
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('active'));
+  document.getElementById('pg-'+p).classList.add('active');
+  document.getElementById('crumb').innerHTML=`Live Corps &nbsp;/&nbsp; <strong>${PL[p]||p}</strong>`;
+  if(p==='mart'){rP(mf||'all');if(mf)setFTab(mf);}
+  if(p==='about'){renderReviews();buildOrg();}
+  closeSB();window.scrollTo(0,0);
+}
+
+function br(k){
+  const b=BD[k];if(!b)return;
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('active'));
+  document.getElementById('pg-brand').classList.add('active');
+  document.getElementById('crumb').innerHTML=`Live Corps &nbsp;/&nbsp; Live Eats &nbsp;/&nbsp; <strong>${b.name}</strong>`;
+  document.getElementById('bh').innerHTML=`
+    <div class="bh" data-i="${b.i}" style="background:linear-gradient(135deg,${b.bg},${dk(b.bg)})">
+      <div class="btag">${b.label}</div>
+      <div class="bname">${b.name}</div>
+      <div class="bsub">"${b.tagline}"</div>
+      <div class="bmanifesto">${b.manifesto}</div>
+      <div class="bcta">
+        <a href="#ms-${k}" class="btn bw" onclick="document.getElementById('ms-${k}').scrollIntoView({behavior:'smooth'});return false">View Menu</a>
+        <button class="btn bg" onclick="toggleCart()">View Cart 🛒</button>
+      </div>
+    </div>`;
+
+  let h=`<div id="ms-${k}">`;
+  b.cats.forEach(c=>{
+    h+=`<div class="mcat"><div class="mch">${c.h}</div>`;
+    c.items.forEach(it=>{
+      const pn=parseInt(it.p.replace(/[^\d]/g,''))||0;
+      h+=`<div class="mr">
+        <div><div class="mn">${it.n}</div>${it.d?`<div class="md">${it.d}</div>`:''}</div>
+        <div class="mr-right">
+          <div class="mp" style="color:${b.bg}">${it.p}</div>
+          <button class="add-item-btn" style="background:${b.bg}" onclick="addToCart('${it.n.replace(/'/g,"\\'")}','${b.name}','${it.p}',${pn},'${b.emoji}')">+ Add</button>
+        </div>
+      </div>`;
+    });
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+
+  // Brand reviews
+  const brandRevs=reviews.filter(r=>r.brand.toLowerCase().includes(b.name.toLowerCase().split(' ')[0]));
+  if(brandRevs.length){
+    h+=`<div class="rev-section"><div class="slabel">Reviews</div><div class="stitle" style="font-size:26px">${b.name} Reviews</div>
+    <div class="rev-grid">${brandRevs.slice(0,3).map(r=>`
+      <div class="rev-card">
+        <div class="rev-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+        <div class="rev-text">"${r.text}"</div>
+        <div class="rev-author"><div class="rev-av">${r.av}</div><div><div class="rev-name">${r.name}</div><div class="rev-date">${r.date}</div></div></div>
+      </div>`).join('')}
+    </div></div>`;
+  }
+
+  document.getElementById('bb').innerHTML=`<div class="bbody">${h}</div>`;
+  closeSB();window.scrollTo(0,0);
+}
+
+// ── CART FUNCTIONS ───────────────────────────────────────────────
+function addToCart(name,brand,priceStr,priceNum,emoji){
+  const existing=cart.find(i=>i.name===name);
+  if(existing){existing.qty++;}
+  else{cart.push({name,brand,price:priceStr,num:priceNum,emoji,qty:1});}
+  updateCartUI();
+  T(`${emoji} ${name} added to cart`,'green');
+}
+
+function updateCartUI(){
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  const total=cart.reduce((s,i)=>s+(i.num*i.qty),0);
+  const el=document.getElementById('cart-count');
+  el.textContent=count;
+  el.classList.toggle('vis',count>0);
+  document.getElementById('cart-total').textContent=`৳${total.toLocaleString()}`;
+  renderCartItems();
+}
+
+function renderCartItems(){
+  const el=document.getElementById('cart-items');
+  if(!cart.length){
+    el.innerHTML=`<div class="cart-empty"><div class="cart-empty-ico">🛒</div><div class="cart-empty-t">Cart is empty</div><div class="cart-empty-s">Add items from any brand menu</div></div>`;
+    return;
+  }
+  el.innerHTML=cart.map((item,idx)=>`
+    <div class="ci-row">
+      <div class="ci-emoji">${item.emoji}</div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-brand">${item.brand}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="ci-qty">
+          <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+          <div class="qty-num">${item.qty}</div>
+          <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+        </div>
+        <div class="ci-price">৳${(item.num*item.qty).toLocaleString()}</div>
+        <button class="ci-del" onclick="removeItem(${idx})">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function changeQty(idx,delta){
+  cart[idx].qty+=delta;
+  if(cart[idx].qty<=0)cart.splice(idx,1);
+  updateCartUI();
+}
+
+function removeItem(idx){
+  cart.splice(idx,1);
+  updateCartUI();
+}
+
+function toggleCart(){
+  document.getElementById('cart-panel').classList.toggle('open');
+}
+
+// ── CHECKOUT ─────────────────────────────────────────────────────
+function openCheckout(){
+  if(!cart.length){T('Your cart is empty!','');return;}
+  const total=cart.reduce((s,i)=>s+(i.num*i.qty),0);
+  const delivery=total>=500?0:60;
+  document.getElementById('checkout-summary').innerHTML=
+    cart.map(i=>`<div class="os-row"><span>${i.qty}× ${i.name}</span><span>৳${(i.num*i.qty).toLocaleString()}</span></div>`).join('')+
+    `<div class="os-row"><span>Delivery</span><span>${delivery===0?'Free':'৳'+delivery}</span></div>`+
+    `<div class="os-row"><span>Total</span><span>৳${(total+delivery).toLocaleString()}</span></div>`;
+  document.getElementById('checkout-modal').classList.add('open');
+}
+
+function closeCheckout(){
+  document.getElementById('checkout-modal').classList.remove('open');
+}
+
+function selPay(el,method){
+  document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('sel'));
+  document.querySelectorAll('.pay-details').forEach(d=>d.classList.remove('vis'));
+  el.classList.add('sel');
+  selectedPayment=method;
+  const det=document.getElementById('pay-details-'+method);
+  if(det)det.classList.add('vis');
+}
+
+function placeOrder(){
+  const name=document.getElementById('co-name').value.trim();
+  const phone=document.getElementById('co-phone').value.trim();
+  const addr=document.getElementById('co-addr').value.trim();
+  if(!name||!phone||!addr){T('Please fill in your name, phone and address.','');return;}
+  closeCheckout();
+  document.getElementById('cart-panel').classList.remove('open');
+  cart=[];
+  updateCartUI();
+  T('✅ Order placed! We\'ll confirm within 5 minutes.','green');
+}
+
+// ── MART ────────────────────────────────────────────────────────
+function rP(f){
+  const list=f==='all'?PR:PR.filter(p=>p.c===f);
+  document.getElementById('pg2').innerHTML=list.map(p=>`
+    <div class="pc">
+      <div class="pimg">${p.e}</div>
+      <div class="pbody">
+        <div class="pcat">${CL[p.c]}</div>
+        <div class="pname">${p.n}</div>
+        <div class="pdesc">${p.d}</div>
+        <div class="pfoot">
+          <div class="ppr">${p.p}</div>
+          <button class="ab" onclick="addToCart('${p.n.replace(/'/g,"\\'")}','Live Mart','${p.p}',${parseInt(p.p.replace(/[^\d]/g,''))||0},'${p.e}')">+</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function fM(c,btn){
+  rP(c);
+  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+}
+
+function setFTab(c){
+  document.querySelectorAll('.ftab').forEach(b=>{
+    const t=b.textContent.toLowerCase().replace(/\s+/g,'');
+    const cc=c.replace(/-/g,'');
+    if((c==='all'&&t==='all')||t.includes(cc)||cc.includes(t))b.classList.add('active');
+  });
+}
+
+// ── HELPERS ─────────────────────────────────────────────────────
+function dk(h){
+  let r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
+  return`#${Math.max(0,r-28).toString(16).padStart(2,'0')}${Math.max(0,g-18).toString(16).padStart(2,'0')}${Math.max(0,b-18).toString(16).padStart(2,'0')}`;
+}
+
+function tSec(id){document.getElementById(id).classList.toggle('open')}
+function openSB(){document.getElementById('sb').classList.add('open');document.getElementById('ovl').classList.add('open')}
+function closeSB(){document.getElementById('sb').classList.remove('open');document.getElementById('ovl').classList.remove('open')}
+
+function T(m,type){
+  const t=document.getElementById('toast');
+  t.textContent=m;
+  t.style.background=type==='green'?'var(--g1)':'var(--g0)';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3400);
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+rP('all');
+// Close cart on overlay click
+document.addEventListener('click',function(e){
+  const panel=document.getElementById('cart-panel');
+  if(panel.classList.contains('open')&&!panel.contains(e.target)&&!e.target.closest('.cart-btn')&&!e.target.closest('.add-item-btn')&&!e.target.closest('.ab')){
+    panel.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
